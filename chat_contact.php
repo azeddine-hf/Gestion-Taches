@@ -44,7 +44,7 @@ include('./include/connect.php');
                                 <!--------- ------------>
 
                                 <?php
-                                
+
 
                                 $email2 = $_SESSION['user'];
                                 $ide = $_REQUEST['ID_equipe'];
@@ -96,28 +96,30 @@ include('./include/connect.php');
                                                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-md">
                                                                         <form class="p-2">
                                                                             <div>
-                                                                                <input type="text" class="form-control rounded" placeholder="Search...">
+                                                                                <input type="text" id="filter" class="form-control rounded" placeholder="Rechercher ...">
                                                                             </div>
                                                                         </form>
                                                                     </div>
                                                                 </div>
                                                             </li>
 
+                                                            <?php
+                                                            $getadmin = "SELECT * from Login Where type='admin' AND email='" . $_SESSION['user'] . "'";
+                                                            $resget = $connection->query($getadmin);
+                                                            if (mysqli_num_rows($resget) > 0) {
+                                                            ?>
+                                                                <li class="list-inline-item">
+                                                                    <div class="dropdown">
+                                                                        <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                            <i class="uil uil-ellipsis-h"></i>
+                                                                        </button>
+                                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                                            <a class="dropdown-item" href="contacts-profile.php?id=<?php echo $ide ?>">Profile</a>
+                                                                        </div>
 
-                                                            <li class="list-inline-item">
-                                                                <div class="dropdown">
-                                                                    <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <i class="uil uil-ellipsis-h"></i>
-                                                                    </button>
-                                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                                        <a class="dropdown-item" href="#">Profile</a>
-                                                                        <a class="dropdown-item" href="#">Archive</a>
-                                                                        <a class="dropdown-item" href="#">Muted</a>
-                                                                        <a class="dropdown-item" href="#">Delete</a>
                                                                     </div>
-                                                                </div>
-                                                            </li>
-
+                                                                </li>
+                                                            <?php } ?>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -125,10 +127,8 @@ include('./include/connect.php');
 
                                             <div>
                                                 <div class="chat-conversation py-3">
-                                                    <ul class="list-unstyled mb-0 chat-conversation-message px-3 simplebar-content-wrapper" data-simplebar id="boxdown2">
-                                                        <li class="chat-day-title">
-                                                            <div class="title">Today </div>
-                                                        </li>
+                                                    <ul id="header" class="list-unstyled mb-0 chat-conversation-message px-3 simplebar-content-wrapper" data-simplebar id="boxdown2">
+
                                                         <div id="load">
 
 

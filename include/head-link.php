@@ -62,9 +62,24 @@
                 margin: 0 auto;
                 font-family: Arial, sans-serif;
             }
+            /* for live search */
 
-            
-            
+            .header {
+                display: flex;
+            }
+
+            .header p {
+                flex: 1;
+                font-weight: bold;
+            }
+
+            .results {
+                display: flex;
+            }
+
+            .results p {
+                flex: 1;
+            }
         </style>
 
 

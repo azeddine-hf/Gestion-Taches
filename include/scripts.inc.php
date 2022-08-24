@@ -40,40 +40,66 @@
   <!-- parsleyjs -->
   <script src="assets/libs/parsleyjs/parsley.min.js"></script>
   <script src="./assets/js/pages/chosen.jquery.js"></script>
-<!--------Date picker--------->
-<script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <!--------Date picker--------->
+  <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
 
   <script src="assets/js/pages/form-validation.init.js"></script>
   <!-- Table Editable plugin -->
   <script src="assets/libs/table-edits/build/table-edits.min.js"></script>
-  <script src="assets/js/pages/table-editable.int.js"></script> 
-<!-------POPPER--------->
-<script src="assets/js/popper.min.js"></script> 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script> -->
-<!---------AJAX--------->
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                $('#load2aab').load("test3.php").fadeIn("slow");
-            }, 700);
-            setInterval(function() {
-                $('#load2aab').load("test3.php").fadeIn("slow");
-            }, 1000);
+  <script src="assets/js/pages/table-editable.int.js"></script>
+  <!-------POPPER--------->
+  <script src="assets/js/popper.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script> -->
+  <!---------AJAX--------->
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+      $(document).ready(function() {
+          setTimeout(function() {
+              $('#load2aab').load("test3.php").fadeIn("slow");
+          }, 700);
+          setInterval(function() {
+              $('#load2aab').load("test3.php").fadeIn("slow");
+          }, 1000);
 
 
-        });
-    </script><script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                $('#loadnewnumber').load("test4.php").fadeIn("slow");
-            }, 800);
-            setInterval(function() {
-                $('#loadnewnumber').load("test4.php").fadeIn("slow");
-            }, 1000);
+      });
+  </script>
+  <script>
+      $(document).ready(function() {
+          setTimeout(function() {
+              $('#loadnewnumber').load("test4.php").fadeIn("slow");
+          }, 800);
+          setInterval(function() {
+              $('#loadnewnumber').load("test4.php").fadeIn("slow");
+          }, 1000);
 
 
-        });
-    </script>
-<!-- jQuery UI -->
+      });
+  </script>
+  <script>
+      $("#filter").keyup(function() {
+
+          // Retrieve the input field text and reset the count to zero
+          var filter = $(this).val(),
+              count = 0;
+
+          // Loop through the comment list
+          $('#results div').each(function() {
+
+
+              // If the list item does not contain the text phrase fade it out
+              if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                  $(this).hide(); // MY CHANGE
+
+                  // Show the list item if the phrase matches and increase the count by 1
+              } else {
+                  $(this).show(); // MY CHANGE
+                  count++;
+              }
+
+          });
+
+      });
+  </script>
+  <!-- jQuery UI -->

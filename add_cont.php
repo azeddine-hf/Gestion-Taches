@@ -44,7 +44,7 @@ include('./include/connect.php');
                                             <h5 class="font-size-16 mb-3"><i class="uil uil-user me-1"></i> Equipe</h5>
                                             <ul class="list-unstyled chat-list statumain2">
                                                 <?php
-                                                $qury = "SELECT  * FROM equipe Where ID!=" . $_SESSION['id'] . "";
+                                                $qury = "SELECT  l.active,e.* FROM equipe e,login l Where l.email=e.Email AND  e.ID!=" . $_SESSION['id'] . "";
                                                 $resq = $connection->query($qury);
 
                                                 while ($row = mysqli_fetch_assoc($resq)) {
@@ -59,12 +59,25 @@ include('./include/connect.php');
                                                                             <div class="flex-shrink-0 me-3 align-self-center">
                                                                                 <img src="<?php echo $row['photo'] ?>" class="avatar-xs rounded-circle" alt="">
                                                                             </div>
-                                                                            <span class="user-status"></span>
+                                                                            <?php
+                                                                            if ($row['active'] == 'online') {
+                                                                            ?>
+                                                                                <i class="badge bg-success">en ligne</i>
+                                                                            <?php } else {
+                                                                            ?><i class="badge bg-danger">hors ligne</i><?php
+                                                                                                                    } ?>
                                                                         </div>
                                                                     </div>
                                                                     <div class="flex-grow-1 overflow-hidden">
 
-                                                                        <h5 class="text-truncate font-size-14 mb-1"><?php echo $row['Prenom'] . ' ' . $row['Nom'] ?></h5>
+                                                                        <h5 class="text-truncate font-size-14 mb-1"><?php echo $row['Prenom'] . ' ' . $row['Nom'] ?><?php
+                                                                                                                                                                    if ($row['active'] == 'online') {
+                                                                                                                                                                    ?>
+                                                                            <i class="mdi mdi-circle text-success align-middle font-size-10 ms-1"></i><?php
+                                                                                                                                                                    } else {
+                                                                                                                                                        ?><i class="mdi mdi-circle text-danger align-middle font-size-10 ms-1"><?php
+                                                                                                                                                                    } ?></i>
+                                                                        </h5>
 
 
                                                                     </div>

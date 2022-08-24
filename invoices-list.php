@@ -3,7 +3,11 @@
 
     
 <!-- Mirrored from themesbrand.com/minible/layouts/invoices-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 May 2022 13:16:27 GMT -->
-<?php include "./include/head-link.php"?>
+<?php 
+include('./include/security.php');
+$pageTitle = 'Facturation';
+include('./include/connect.php');
+include "./include/head-link.php";?>
 
     
     <body>

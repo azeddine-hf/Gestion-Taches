@@ -57,6 +57,8 @@ if (isset($_POST['sub_btnlogin'])) {
   $row = mysqli_fetch_assoc($resry2);
   $remail = $row['email'];
   if (mysqli_num_rows($resry) > 0) {
+    $query74 = "UPDATE login SET active='online' Where email='".$row['email']."'";
+    $result_qury74 = $connection->query($query74);
     $_SESSION['user'] = $row['email'];
     $_SESSION['nom'] = $row['Nom'] . ' ' . $row['Prenom'];
     $_SESSION['img'] = $row['photo'];
@@ -223,27 +225,27 @@ if (isset($_POST['sub_message'])) {
   $query50 = "INSERT INTO chat_contact(Sender_email,Destination_email,Message,send_date) VALUES('$sender','$email_recept','$encryption',SYSDATE())";
   $result_qury = $connection->query($query50);
 
- 
+
   $query20 = "SELECT MAX(Id_chat)  as azc FROM chat_contact";
   $result_qury20 = $connection->query($query20);
   $row80 = mysqli_fetch_assoc($result_qury20);
 
-  $query5 = "UPDATE chat_contact SET last_msg='$encryption' WHERE  Id_chat=".$row80['azc']." AND((Sender_email='$sender' and Destination_email='$email_recept') or (Destination_email='$email_recept' and Sender_email='$sender'))";
+  $query5 = "UPDATE chat_contact SET last_msg='$encryption' WHERE  Id_chat=" . $row80['azc'] . " AND((Sender_email='$sender' and Destination_email='$email_recept') or (Destination_email='$email_recept' and Sender_email='$sender'))";
   $result_qury5 = $connection->query($query5);
 
   $query200 = "SELECT MAX(Id_chat)  as azkc,MAX(send_date) as date_nw FROM chat_contact";
   $result_qury200 = $connection->query($query200);
   $row800 = mysqli_fetch_assoc($result_qury200);
 
-  $query74 = "UPDATE chat_contact SET last_msg='' WHERE send_date<'".$row800['date_nw']."' AND Id_chat !=".$row800['azkc']." AND (last_msg=Message OR last_msg != Message) AND ((Sender_email='$sender' and Destination_email='$email_recept') or (Destination_email='$sender' and Sender_email='$email_recept')) ";
+  $query74 = "UPDATE chat_contact SET last_msg='' WHERE send_date<'" . $row800['date_nw'] . "' AND Id_chat !=" . $row800['azkc'] . " AND (last_msg=Message OR last_msg != Message) AND ((Sender_email='$sender' and Destination_email='$email_recept') or (Destination_email='$sender' and Sender_email='$email_recept')) ";
   $result_qury74 = $connection->query($query74);
 
-  
 
- 
- 
 
-  
+
+
+
+
 
   echo "<meta http-equiv=\"refresh\" content=\"0;URL=../chat_contact.php?ID_equipe=$id_recept\">";
 }

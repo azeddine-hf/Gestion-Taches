@@ -36,8 +36,11 @@ if($dbconfig){
     ';
     }
     if(!$_SESSION['user']){
+        $query7 = "UPDATE login SET active='offline' ";
+        $connection->query($query7);
         header('Location:auth-login.php');
         // echo "<meta http-equiv=\"refresh\" content=\"0;URL= auth-login.php\">";
+
 
     }
     

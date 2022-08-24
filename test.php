@@ -87,23 +87,22 @@ while ($row10 = mysqli_fetch_assoc($resqury41)) {
     $msg = openssl_decrypt($row10['Message'], $ciphering, $decryption_key, $options, $decryption_iv);
     $last_msg = openssl_decrypt($row10['last_msg'], $ciphering, $decryption_key, $options, $decryption_iv);
 ?>
-    <li <?php if ($row10['Sender_email'] == $email2) {
+    <li id="results" <?php if ($row10['Sender_email'] == $email2) {
         ?>class="right" <?php
                     } else ?>>
 
-        <div class="conversation-list">
-            <div class="ctext-wrap ">
+        <div class="conversation-list ">
+            <div class="ctext-wrap">
 
                 <div class="ctext-wrap-content">
-                    <h5 class="font-size-14 conversation-name"><span class="d-inline-block font-size-12 text-muted ms-2"><?php date_default_timezone_set('Europe/Madrid');
-                                                    echo facebook_time_ago($row10['send_date']); ?></span></h5>
                     <p class="mb-0">
                         <?php
                         echo $msg ?>
-                    </p>
+                    </p><i class="badge bg-secondary bg-opacity-75"><?php date_default_timezone_set('Europe/Madrid');
+                            echo facebook_time_ago($row10['send_date']); ?> </i>
                 </div>
-
-                <!-- <div class="dropdown align-self-start">
+        
+    <!-- <div class="dropdown align-self-start">
                     <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="uil uil-ellipsis-v"></i>
                     </a>
@@ -112,10 +111,11 @@ while ($row10 = mysqli_fetch_assoc($resqury41)) {
                         <a  data-bs-toggle="modal" data-bs-target="#delete_popup" class="btn text-danger delete-btn passingID" data-id="<?php echo $row10['Id_chat'] ?>"><i class="uil uil-trash-alt font-size-18"></i><span class="fw-bold"> Supprimer</span></a>
                     </div>
                 </div> -->
-            </div>
+    </div>
+    
 
 
-        </div>
+    </div>
 
 
     </li>

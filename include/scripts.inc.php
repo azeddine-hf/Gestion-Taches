@@ -45,6 +45,14 @@
 
 
   <script src="assets/js/pages/form-validation.init.js"></script>
+   <!-- plugins -->
+   <script src="assets/libs/select2/js/select2.min.js"></script>
+        <script src="assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+        <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+        <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+        <script src="assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
+
   <!-- Table Editable plugin -->
   <script src="assets/libs/table-edits/build/table-edits.min.js"></script>
   <script src="assets/js/pages/table-editable.int.js"></script>
@@ -53,6 +61,10 @@
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script> -->
   <!---------AJAX--------->
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <!-- datepicker js -->
+  <script src="assets/libs/flatpickr/flatpickr.min.js"></script>
+  <!-- init js -->
+  <script src="assets/js/pages/form-advanced.init.js"></script>
   <script>
       $(document).ready(function() {
           setTimeout(function() {
@@ -104,19 +116,21 @@
       //-----------------------------for multi insert invoice
       $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
-	var actions = $("table td:last-child").html();
+	var actions = $("table td:first-child").html();
+    var td2 = $("table tr:nth-child(1) td:nth-child(2)").children("select").select2().html();
 	// Append table with add row form on add new button click
     $(".add-new").click(function(){
 		$(this).attr("disabled", "disabled");
-		var index = $("table tbody tr:last-child").index();
+		var index = $("table tbody tr:first-child").index();
         var row = '<tr>' +
-            '<td><input type="text" class="form-control" name="name" id="name"></td>' +
+        '<td>' + actions + '</td>'+
+            '<td>'+ td2 +'</td>' +
             '<td><input type="text" class="form-control" name="department" id="department"></td>' +
-            '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +'<td><input type="text" class="form-control" name="phone" id="phone"></td>' +'<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
-			'<td>' + actions + '</td>' +
+            '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
+            '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
         '</tr>';
     	$("table").append(row);		
-		$("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+		$("table tbody tr").eq(index - 1).find(".add, .edit").toggle();
         $('[data-toggle="tooltip"]').tooltip();
     });
 	// Add row on add button click
@@ -142,7 +156,7 @@
     });
 	// Edit row on edit button click
 	$(document).on("click", ".edit", function(){		
-        $(this).parents("tr").find("td:not(:last-child)").each(function(){
+        $(this).parents("tr").find("td:not(:first-child,:nth-child(1)):not(:nth-child(2)").each(function(){
 			$(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
 		});		
 		$(this).parents("tr").find(".add, .edit").toggle();

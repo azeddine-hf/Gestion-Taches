@@ -29,46 +29,94 @@ include "./include/head-link.php"; ?>
         <div class="main-content">
 
             <div class="page-content">
-                <div class="container">
-                    <div class="table-wrapper">
-                        <div class="table-title">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <h2>Employee <b>Details</b></h2>
+                <div class="card">
+
+                    <form action="">
+                        <div class="card-body row col-xl-12">
+                            <div class="col-12">
+                                <h3>Ajouter une nouvelle <B>Facture</B></h3>
+                            </div>
+                            <hr>
+                            <div class="col-6">
+                                <label for="client-id">Client ref</label></br>
+                                <select class="form-control select2 ">
+                                    <option selected disabled="disabled">Choisi un Client</option>
+                                    <?php
+                                    $qury = "SELECT * FROM  client ";
+                                    $resry = $connection->query($qury);
+                                    if ($resry) {
+                                        while ($row = mysqli_fetch_assoc($resry)) {
+                                            $client = $row['Nom'];
+                                            $id = $row['ID'];
+                                            echo '<option value="' . $id . '">' . $client . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="basicpill-address-input">Adresse Client</label>
+                                <textarea id="basicpill-address-input" class="form-control" rows="1" placeholder="Entrer l'adresse client"></textarea>
+                            </div>
+
+                            <div class="table-wrapper col-12">
+                                <div class="table-title">
+
                                 </div>
-                                <div class="col-sm-4">
-                                    <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+                                <table class="table table-hover text-nowrap">
+                                    <thead class="table-success text-center">
+                                        <tr>
+                                            <th scope="col">Actions</th>
+                                            <th scope="col" style="width: 340px;">Désignation</th>
+                                            <th scope="col" style="width: 100px;">Qté</th>
+                                            <th scope="col" style="width: 170px;">Prix</th>
+                                            <th scope="col">Montant HT</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        <tr style="display: none;">
+                                            <td>
+                                                <a class="add" data-toggle="tooltip"><i class="uil uil-check-circle font-size-100"></i></a>
+                                                <a class="edit" data-toggle="tooltip"><i class="uil uil-edit-alt font-size-100"></i></a>
+                                                <a class="delete" data-toggle="tooltip"><i class="uil uil-times-circle font-size-100"></i></a>
+                                            </td>
+                                            <td style="height: 100px;" class="2ndtd">
+                                                <select class="form-control select2 " id="select23">
+                                                    <option selected disabled="disabled">Choisi un Client</option>
+                                                    <?php
+                                                    $qury = "SELECT * FROM  client ";
+                                                    $resry = $connection->query($qury);
+                                                    if ($resry) {
+                                                        while ($row = mysqli_fetch_assoc($resry)) {
+                                                            $client = $row['Nom'];
+                                                            $id = $row['ID'];
+                                                            echo '<option value="' . $id . '">' . $client . '</option>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-success add-new w-100 rounded-pill"><i class="fa fa-plus"></i> Add New</button>
                                 </div>
                             </div>
-                        </div>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>From(mm/yy)</th>
-                                    <th>To(mm/yy)</th>
-                                    <th>Organization</th>
-                                    <th>Position</th>
-                                    <th>Primary Responsibility</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style="display: none;">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <a class="add" title="Add" data-toggle="tooltip"><i class="uil uil-plus-circle"></i></a>
-                                        <a class="edit" title="Edit" data-toggle="tooltip"><i class="uil uil-minus-circle"></i></a>
-                                        <a class="delete" title="Delete" data-toggle="tooltip"><i class="uil uil-times-circle"></i></a>
-                                    </td>
-                                </tr>
 
-                            </tbody>
-                        </table>
-                    </div>
+
+
+                        </div>
+                    </form>
+
+
                 </div>
             </div>
             <!-- End Page-content -->

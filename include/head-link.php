@@ -16,6 +16,14 @@
         <link rel="stylesheet" href="assets/css/datatables.min.css">
 
         <link href="./assets/css/style.css" rel="stylesheet" />
+        <!-- plugin css -->
+        <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/spectrum-colorpicker2/spectrum.min.css" rel="stylesheet" type="text/css">
+        <link href="assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+        <link href="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="assets/libs/%40chenfengyuan/datepicker/datepicker.min.css">
+         <!-- datepicker css -->
+         <link rel="stylesheet" href="assets/libs/flatpickr/flatpickr.min.css">
 
         <!-- Icons Css -->
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -120,7 +128,7 @@
         margin: 0 5px;
         cursor: pointer;
     }
-    table.table th:last-child {
+    table.table th:first-child {
         width: 100px;
     }
     table.table td a {
@@ -142,16 +150,17 @@
         font-size: 19px;
     }
 	table.table td a.add i {
-        font-size: 24px;
-    	margin-right: -1px;
-        position: relative;
-        top: 3px;
-    }    
+        font-size: 150%;
+    } 
+    table.table td a.delete i {
+        font-size: 150%;
+
+    }   
     table.table .form-control {
         height: 32px;
         line-height: 32px;
         box-shadow: none;
-        border-radius: 2px;
+        border-radius: 15px;
     }
 	table.table .form-control.error {
 		border-color: #f50000;

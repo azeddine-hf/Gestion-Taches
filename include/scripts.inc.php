@@ -120,7 +120,7 @@
       $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 	var actions = $("table td:first-child").html();
-    var td2 = $("table tr:nth-child(1) td:nth-child(2)").html();
+    var td2 = $("table tr:nth-child(2) td:nth-child(2)");
 	// Append table with add row form on add new button click
     $(".add-new").click(function(){
 		$(this).attr("disabled", "disabled");

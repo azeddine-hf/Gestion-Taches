@@ -39,7 +39,7 @@ include "./include/head-link.php"; ?>
                             <hr>
                             <div class="col-6">
                                 <label for="client-id">Client ref</label></br>
-                                <select class="form-control select2 ">
+                                <select class="form-control select2">
                                     <option selected disabled="disabled">Choisi un Client</option>
                                     <?php
                                     $qury = "SELECT * FROM  client ";
@@ -83,7 +83,7 @@ include "./include/head-link.php"; ?>
                                                 <a class="delete" data-toggle="tooltip"><i class="uil uil-times-circle font-size-100"></i></a>
                                             </td>
                                             <td style="height: 100px;" class="2ndtd">
-                                                <select class="form-control select2 " id="select23">
+                                                <select class="form-control select2" name="StockItem[]">
                                                     <option selected disabled="disabled">Choisi un Client</option>
                                                     <?php
                                                     $qury = "SELECT * FROM  client ";

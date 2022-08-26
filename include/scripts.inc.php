@@ -52,6 +52,8 @@
         <script src="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
         <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
         <script src="assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>  
+
 
   <!-- Table Editable plugin -->
   <script src="assets/libs/table-edits/build/table-edits.min.js"></script>
@@ -114,10 +116,11 @@
 
       });
       //-----------------------------for multi insert invoice
+   
       $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 	var actions = $("table td:first-child").html();
-    var td2 = $("table tr:nth-child(1) td:nth-child(2)").children("select").select2().html();
+    var td2 = $("table tr:nth-child(1) td:nth-child(2)").html();
 	// Append table with add row form on add new button click
     $(".add-new").click(function(){
 		$(this).attr("disabled", "disabled");

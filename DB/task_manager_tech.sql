@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 24, 2022 at 07:07 AM
+-- Generation Time: Aug 26, 2022 at 01:46 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `chat_contact` (
   `last_msg` varchar(500) DEFAULT NULL,
   `status_msg` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`Id_chat`)
-) ENGINE=InnoDB AUTO_INCREMENT=335 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=338 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `chat_contact`
@@ -62,7 +62,7 @@ INSERT INTO `chat_contact` (`Id_chat`, `Sender_email`, `Destination_email`, `Mes
 (318, 'mehdibenhmidi15@gmail.com', 'salma.haie@gmail.com', 'qZ9j7JY=', '2022-08-23 09:38:10', 0, '0000-00-00 00:00:00', '', NULL),
 (319, 'mehdibenhmidi15@gmail.com', 'salma.haie@gmail.com', '9sY=', '2022-08-23 09:48:40', 0, '0000-00-00 00:00:00', '', 'vu'),
 (320, 'azeddine.ha15@gmail.com', 'salma.haie@gmail.com', '/8x6sA==', '2022-08-23 09:49:14', 0, '0000-00-00 00:00:00', '', NULL),
-(321, 'azeddine.ha15@gmail.com', 'mehdibenhmidi15@gmail.com', 'qZ9j7pGK', '2022-08-23 09:49:41', 0, '0000-00-00 00:00:00', 'qZ9j7pGK', NULL),
+(321, 'azeddine.ha15@gmail.com', 'mehdibenhmidi15@gmail.com', 'qZ9j7pGK', '2022-08-23 09:49:41', 0, '0000-00-00 00:00:00', 'qZ9j7pGK', 'vu'),
 (322, 'mehdibenhmidi15@gmail.com', 'salma.haie@gmail.com', 'rpUt6dSQUvV6', '2022-08-23 10:49:42', 0, '0000-00-00 00:00:00', '', 'vu'),
 (323, 'azeddine.ha15@gmail.com', 'salma.haie@gmail.com', 'rpUn6dSOV/J3', '2022-08-23 11:46:09', 0, '0000-00-00 00:00:00', '', NULL),
 (324, 'azeddine.ha15@gmail.com', 'salma.haie@gmail.com', '9sY=', '2022-08-23 13:12:30', 0, '0000-00-00 00:00:00', '', NULL),
@@ -75,7 +75,10 @@ INSERT INTO `chat_contact` (`Id_chat`, `Sender_email`, `Destination_email`, `Mes
 (331, 'azeddine.ha15@gmail.com', 'salma.haie@gmail.com', '88I=', '2022-08-23 17:12:01', 0, '0000-00-00 00:00:00', '', 'vu'),
 (332, 'azeddine.ha15@gmail.com', 'salma.haie@gmail.com', 'spEw/NTRBg==', '2022-08-23 17:12:54', 0, '0000-00-00 00:00:00', 'spEw/NTRBg==', 'vu'),
 (333, 'mehdibenhmidi15@gmail.com', 'salma.haie@gmail.com', 'oZw=', '2022-08-23 17:19:22', 0, '0000-00-00 00:00:00', '', 'vu'),
-(334, 'mehdibenhmidi15@gmail.com', 'salma.haie@gmail.com', 'qJUn7J3EW/o=', '2022-08-23 17:19:47', 0, '0000-00-00 00:00:00', 'qJUn7J3EW/o=', NULL);
+(334, 'mehdibenhmidi15@gmail.com', 'salma.haie@gmail.com', 'qJUn7J3EW/o=', '2022-08-23 17:19:47', 0, '0000-00-00 00:00:00', '', 'vu'),
+(335, 'salma.haie@gmail.com', '', '9g==', '2022-08-24 10:32:13', 0, '0000-00-00 00:00:00', '9g==', NULL),
+(336, 'mehdibenhmidi15@gmail.com', 'salma.haie@gmail.com', 'pZc=', '2022-08-25 11:01:29', 0, '0000-00-00 00:00:00', '', 'vu'),
+(337, 'salma.haie@gmail.com', 'mehdibenhmidi15@gmail.com', 'qYEqqMs=', '2022-08-25 11:01:51', 0, '0000-00-00 00:00:00', 'qYEqqMs=', 'vu');
 
 -- --------------------------------------------------------
 
@@ -142,6 +145,41 @@ INSERT INTO `equipe` (`ID`, `Nom`, `Prenom`, `jobe`, `photo`, `Mobile`, `Email`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fact_order`
+--
+
+DROP TABLE IF EXISTS `fact_order`;
+CREATE TABLE IF NOT EXISTS `fact_order` (
+  `id_fact` int NOT NULL AUTO_INCREMENT,
+  `client_id` int NOT NULL,
+  `adress_client` varchar(1000) NOT NULL,
+  `date_fact` datetime NOT NULL,
+  `is_deleted` int NOT NULL,
+  `date_deleted` datetime NOT NULL,
+  `deleted_factby` varchar(100) NOT NULL,
+  `created_factby` varchar(100) NOT NULL,
+  `updated_factby` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_fact`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fact_order_detail`
+--
+
+DROP TABLE IF EXISTS `fact_order_detail`;
+CREATE TABLE IF NOT EXISTS `fact_order_detail` (
+  `id_detail` int NOT NULL AUTO_INCREMENT,
+  `id_facture` int NOT NULL,
+  `order_id` int NOT NULL,
+  `qte` int NOT NULL,
+  PRIMARY KEY (`id_detail`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `login`
 --
 
@@ -153,6 +191,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `password` varchar(100) NOT NULL,
   `type` varchar(100) NOT NULL,
   `last_seen` datetime NOT NULL,
+  `active` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
@@ -160,11 +199,30 @@ CREATE TABLE IF NOT EXISTS `login` (
 -- Dumping data for table `login`
 --
 
-INSERT INTO `login` (`ID`, `full_name`, `email`, `password`, `type`, `last_seen`) VALUES
-(1, 'azeddine hissouf', 'azeddine.ha15@gmail.com', 'azerty12345', 'admin', '2022-08-23 09:49:07'),
-(2, 'Elkalakhi El Mehdi', 'elmehdi.elkalakhi@gmail.com', 'kl12345tech', 'user', '2022-08-19 17:24:47'),
-(3, 'Haie Salma', 'salma.haie@gmail.com', 'sl12345tech', 'admin', '2022-08-22 09:17:35'),
-(4, 'benhmidi el mehdi', 'mehdibenhmidi15@gmail.com', 'bn123tech', 'user', '2022-08-22 09:38:44');
+INSERT INTO `login` (`ID`, `full_name`, `email`, `password`, `type`, `last_seen`, `active`) VALUES
+(1, 'azeddine hissouf', 'azeddine.ha15@gmail.com', 'azerty12345', 'admin', '2022-08-24 10:23:30', 'offline'),
+(2, 'Elkalakhi El Mehdi', 'elmehdi.elkalakhi@gmail.com', 'kl12345tech', 'user', '2022-08-19 17:24:47', 'offline'),
+(3, 'Haie Salma', 'salma.haie@gmail.com', 'sl12345tech', 'admin', '2022-08-24 10:25:12', 'online'),
+(4, 'benhmidi el mehdi', 'mehdibenhmidi15@gmail.com', 'bn123tech', 'user', '2022-08-24 14:43:53', 'online');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_item`
+--
+
+DROP TABLE IF EXISTS `order_item`;
+CREATE TABLE IF NOT EXISTS `order_item` (
+  `Id_order` int NOT NULL AUTO_INCREMENT,
+  `title_order` varchar(200) NOT NULL,
+  `desc_order` varchar(500) DEFAULT NULL,
+  `price_order` varchar(40) NOT NULL,
+  `date_add` datetime NOT NULL,
+  `is_deleted` int NOT NULL,
+  `deleted_by` varchar(100) NOT NULL,
+  `date_deleted` datetime NOT NULL,
+  PRIMARY KEY (`Id_order`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

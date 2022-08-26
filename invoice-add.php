@@ -39,7 +39,8 @@ include "./include/head-link.php"; ?>
                             <hr>
                             <div class="col-6">
                                 <label for="client-id">Client ref</label></br>
-                                <select class="form-control select2">
+                                <select 
+                                >
                                     <option selected disabled="disabled">Choisi un Client</option>
                                     <?php
                                     $qury = "SELECT * FROM  client ";
@@ -64,7 +65,6 @@ include "./include/head-link.php"; ?>
 
                                 </div>
                                 <table class="table table-hover text-nowrap">
-                                    <thead class="table-success text-center">
                                         <tr>
                                             <th scope="col">Actions</th>
                                             <th scope="col" style="width: 340px;">Désignation</th>
@@ -74,8 +74,6 @@ include "./include/head-link.php"; ?>
 
 
                                         </tr>
-                                    </thead>
-                                    <tbody class="text-center">
                                         <tr style="display: none;">
                                             <td>
                                                 <a class="add" data-toggle="tooltip"><i class="uil uil-check-circle font-size-100"></i></a>
@@ -104,7 +102,6 @@ include "./include/head-link.php"; ?>
 
                                         </tr>
 
-                                    </tbody>
                                 </table>
                                 <div class="col-12">
                                     <button type="button" class="btn btn-success add-new w-100 rounded-pill"><i class="fa fa-plus"></i> Add New</button>

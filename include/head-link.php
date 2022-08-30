@@ -89,54 +89,7 @@
                 flex: 1;
             }
             /* -------------------------------------multi nsert invoice design-------------------------------*/
-            .table-wrapper {
-		width: 100%;
-		margin:auto;
-        background: #fff;
-        padding: 20px;	
-        box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    }
-    .table-title {
-        padding-bottom: 10px;
-        margin: 0 0 10px;
-    }
-    .table-title h2 {
-        margin: 6px 0 0;
-        font-size: 22px;
-    }
-    .table-title .add-new {
-    float: right;
-		height: 30px;
-		font-weight: bold;
-		font-size: 12px;
-		text-shadow: none;
-		min-width: 100px;
-		border-radius: 50px;
-		line-height: 13px;
-    }
-	.table-title .add-new i {
-		margin-right: 4px;
-	}
-    table.table {
-        table-layout: fixed;
-    }
-    table.table tr th, table.table tr td     {
-        border-color: #e9e9e9;
-    }
-    table.table th i {
-        font-size: 13px;
-        margin: 0 5px;
-        cursor: pointer;
-    }
-    table.table th:first-child {
-        width: 100px;
-    }
-    table.table td a {
-		cursor: pointer;
-        display: inline-block;
-        margin: 0 5px;
-		min-width: 24px;
-    }    
+           
 	table.table td a.add {
         color: #27C46B;
     }
@@ -156,18 +109,11 @@
         font-size: 150%;
 
     }   
-    table.table .form-control {
-        height: 32px;
-        line-height: 32px;
-        box-shadow: none;
-        border-radius: 15px;
-    }
+   
 	table.table .form-control.error {
 		border-color: #f50000;
 	}
-	table.table td .add {
-		display: none;
-	}
+	
         </style>
 
 

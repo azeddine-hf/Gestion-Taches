@@ -184,10 +184,10 @@
 
 
 
-        $('[data-toggle="tooltip"]').tooltip();
+          $('[data-toggle="tooltip"]').tooltip();
           //todo edit 
           $(document).on("click", ".edit", function() {
-            var select = $(this).parents("tr").find('.items').select2();
+              var select = $(this).parents("tr").find('.items').select2();
               $(this).parents("tr").find("td:not(:last-child,:first-child").each(function() {
                   $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
               });
@@ -200,7 +200,7 @@
 
           //* ADD ROWS 
           $('#AddPerson').click(function(e) {
-            var index = $("table tbody tr:last-child").index();
+              var index = $("table tbody tr:last-child").index();
               $(this).parents("tr").find('.add2').removeClass("d-none");
               $(this).attr("disabled", "disabled");
               $('.items').select2("destroy");
@@ -210,9 +210,9 @@
                   .attr('id', 'row' + (row++)) // MAKE THE ID UNIQUE
                   .appendTo($('#myTable tbody')) // APPEND TO THE TABLE
                   .show(); // SHOW IT
-                  $(this).parents("tr").find(".add2, .edit").toggle();
-                  $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
-                  $('[data-toggle="tooltip"]').tooltip();
+              $(this).parents("tr").find(".add2, .edit").toggle();
+              $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+              $('[data-toggle="tooltip"]').tooltip();
               $('.items').select2();
               $clone.find('.items').select2('val', '');
           });
@@ -223,7 +223,9 @@
               var empty = false;
               var input = $(this).parents("tr").find('input[type="text"]');
               var select = $(this).parents("tr").find('.items').select2();
-              
+              var selval = $(this).parents("tr").find("#myselect8 option:selected").text();
+              var selecttag =  $(this).parents("tr").find("#myselect8");
+
               input.each(function() {
                   if (!$(this).val()) {
                       $(this).addClass("error");
@@ -232,13 +234,18 @@
                       $(this).removeClass("error");
                   }
               });
+              if(selval == 'Choisi un Client'){
+                    selecttag.addClass("text-danger");
+                    empty = true;
+                    
+                  }
               $(this).parents("tr").find(".error").first().focus();
               if (!empty) {
                   input.each(function() {
                       $(this).parent("td").html($(this).val());
                   });
                   $("#AddPerson").removeAttr("disabled");
-                  select.attr("disabled", "disabled");
+                  
                   $(this).parents("tr").find(".add2, .edit").toggle();
               }
           });

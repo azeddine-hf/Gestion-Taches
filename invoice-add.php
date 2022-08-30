@@ -112,14 +112,14 @@ include "./include/head-link.php"; ?>
                                     <th scope="col">Surname</th>
                                     <th scope="col">Age</th>
                                     <th scope="col">this new</th>
-                                    <th scope="col" ></th>
+                                    <th scope="col" style="width: 200px;"></th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
                                 <tr id="template" style="display: none">
                                     <td scope="row" >
-                                            <select required="required" class="items form-control" name="data[Invoice][item_id][]" tabindex="-1">
-                                                <option selected disabled="disabled">Choisi un Client</option>
+                                            <select id="myselect8" required="required" class="items form-control" name="data[Invoice][item_id][]" tabindex="-1">
+                                                <option selected disabled="disabled" value="Choisi un Client">Choisi un Client</option>
 
                                                 <?php
                                                 $qury = "SELECT * FROM  client ";
@@ -138,9 +138,9 @@ include "./include/head-link.php"; ?>
                                     <td><input type="text" class="form-control" placeholder="Surname" name="surname[]" /></td>
                                     <td><input type="text" class="form-control" placeholder="Age" name="age[]" /></td>
                                     <td>
-                                        <a class="add2" data-toggle="tooltip"><i class="uil uil-check-circle"></i></a>
-                                        <a class="edit" title="Edit" data-toggle="tooltip"><i class="uil uil-edit-alt"></i></a>
-                                        <a class="delete" data-toggle="tooltip"><i class="uil uil-trash"></i></a>
+                                        <a class="add2 text-success" data-toggle="tooltip"><i class="uil uil-check-circle"></i></a>
+                                        <a class="edit text-warning" title="Edit" data-toggle="tooltip"><i class="uil uil-edit-alt"></i></a>
+                                        <a class="delete text-danger" data-toggle="tooltip"><i class="uil uil-trash"></i></a>
                                     </td>
 
 

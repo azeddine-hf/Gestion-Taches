@@ -45,14 +45,14 @@
 
 
   <script src="assets/js/pages/form-validation.init.js"></script>
-   <!-- plugins -->
-   <script src="assets/libs/select2/js/select2.min.js"></script>
-        <script src="assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
-        <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-        <script src="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
-        <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
-        <script src="assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>  
+  <!-- plugins -->
+  <script src="assets/libs/select2/js/select2.min.js"></script>
+  <script src="assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+  <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <script src="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+  <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+  <script src="assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
 
 
   <!-- Table Editable plugin -->
@@ -116,60 +116,151 @@
 
       });
       //-----------------------------for multi insert invoice
-   
-      $(document).ready(function(){
-	$('[data-toggle="tooltip"]').tooltip();
-	var actions = $("table td:first-child").html();
-    var td2 = $("table tr:nth-child(2) td:nth-child(2)");
-	// Append table with add row form on add new button click
-    $(".add-new").click(function(){
-		$(this).attr("disabled", "disabled");
-		var index = $("table tbody tr:first-child").index();
-        var row = '<tr>' +
-        '<td>' + actions + '</td>'+
-            '<td>'+ td2 +'</td>' +
-            '<td><input type="text" class="form-control" name="department" id="department"></td>' +
-            '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
-            '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
-        '</tr>';
-    	$("table").append(row);		
-		$("table tbody tr").eq(index - 1).find(".add, .edit").toggle();
+
+      //   $(document).ready(function() {
+      //       $('[data-toggle="tooltip"]').tooltip();
+      //       var actions = $("table td:first-child").html();
+      //       var example = $('.items').select2();
+
+      //       // Append table with add row form on add new button click
+      //       $(".add-new").click(function() {
+
+      //           $(this).attr("disabled", "disabled");
+      //           var index = $("table tbody tr:first-child").index();
+      //           var row = '<tr>' +
+      //               '<td>' + actions + '</td>' +
+      //               '<td>' + example + '</td>' +
+      //               '<td><input type="text" class="form-control" name="department" id="department"></td>' +
+      //               '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
+      //               '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
+      //               '</tr>';
+
+      //           $("table").append(row);
+      //           $("table tbody tr").eq(index - 1).find(".add, .edit").toggle();
+      //           $('[data-toggle="tooltip"]').tooltip();
+      //           $('.items').select2();
+      //           $clone.find('.items').select2('val', '');
+      //       });
+      //       // Add row on add button click
+      //       $(document).on("click", ".add", function() {
+      //           var empty = false;
+      //           var input = $(this).parents("tr").find('input[type="text"]');
+      //           input.each(function() {
+      //               if (!$(this).val()) {
+      //                   $(this).addClass("error");
+      //                   empty = true;
+      //               } else {
+      //                   $(this).removeClass("error");
+      //               }
+      //           });
+      //           $(this).parents("tr").find(".error").first().focus();
+      //           if (!empty) {
+      //               input.each(function() {
+      //                   $(this).parent("td").html($(this).val());
+      //               });
+      //               $(this).parents("tr").find(".add, .edit").toggle();
+      //               $(".add-new").removeAttr("disabled");
+      //           }
+      //       });
+      //!       // Edit row on edit button click
+      //       $(document).on("click", ".edit", function() {
+      //           $(this).parents("tr").find("td:not(:first-child,:nth-child(1)):not(:nth-child(2)").each(function() {
+      //               $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+      //           });
+      //           $(this).parents("tr").find(".add, .edit").toggle();
+      //           $(".add-new").attr("disabled", "disabled");
+      //       });
+      //!       // Delete row on delete button click
+      //       $(document).on("click", ".delete", function() {
+      //           $(this).parents("tr").remove();
+      //           $(".add-new").removeAttr("disabled");
+      //       });
+      //   });
+      var row = 1;
+      $('.items').select2();
+
+
+      $(function() {
+
+
+
         $('[data-toggle="tooltip"]').tooltip();
-    });
-	// Add row on add button click
-	$(document).on("click", ".add", function(){
-		var empty = false;
-		var input = $(this).parents("tr").find('input[type="text"]');
-        input.each(function(){
-			if(!$(this).val()){
-				$(this).addClass("error");
-				empty = true;
-			} else{
-                $(this).removeClass("error");
-            }
-		});
-		$(this).parents("tr").find(".error").first().focus();
-		if(!empty){
-			input.each(function(){
-				$(this).parent("td").html($(this).val());
-			});			
-			$(this).parents("tr").find(".add, .edit").toggle();
-			$(".add-new").removeAttr("disabled");
-		}		
-    });
-	// Edit row on edit button click
-	$(document).on("click", ".edit", function(){		
-        $(this).parents("tr").find("td:not(:first-child,:nth-child(1)):not(:nth-child(2)").each(function(){
-			$(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-		});		
-		$(this).parents("tr").find(".add, .edit").toggle();
-		$(".add-new").attr("disabled", "disabled");
-    });
-	// Delete row on delete button click
-	$(document).on("click", ".delete", function(){
-        $(this).parents("tr").remove();
-		$(".add-new").removeAttr("disabled");
-    });
-});
+          //todo edit 
+          $(document).on("click", ".edit", function() {
+            var select = $(this).parents("tr").find('.items').select2();
+              $(this).parents("tr").find("td:not(:last-child,:first-child").each(function() {
+                  $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+              });
+              $(this).parents("tr").find(".add2, .edit").toggle();
+              select.removeAttr("disabled");
+              $("#AddPerson").attr("disabled", "disabled");
+          });
+
+
+
+          //* ADD ROWS 
+          $('#AddPerson').click(function(e) {
+            var index = $("table tbody tr:last-child").index();
+              $(this).parents("tr").find('.add2').removeClass("d-none");
+              $(this).attr("disabled", "disabled");
+              $('.items').select2("destroy");
+              e.preventDefault();
+              var template = $('#template')
+                  .clone() // CLONE THE TEMPLATE
+                  .attr('id', 'row' + (row++)) // MAKE THE ID UNIQUE
+                  .appendTo($('#myTable tbody')) // APPEND TO THE TABLE
+                  .show(); // SHOW IT
+                  $(this).parents("tr").find(".add2, .edit").toggle();
+                  $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+                  $('[data-toggle="tooltip"]').tooltip();
+              $('.items').select2();
+              $clone.find('.items').select2('val', '');
+          });
+
+
+          //todo VERIFY
+          $(document).on("click", ".add2", function() {
+              var empty = false;
+              var input = $(this).parents("tr").find('input[type="text"]');
+              var select = $(this).parents("tr").find('.items').select2();
+              
+              input.each(function() {
+                  if (!$(this).val()) {
+                      $(this).addClass("error");
+                      empty = true;
+                  } else {
+                      $(this).removeClass("error");
+                  }
+              });
+              $(this).parents("tr").find(".error").first().focus();
+              if (!empty) {
+                  input.each(function() {
+                      $(this).parent("td").html($(this).val());
+                  });
+                  $("#AddPerson").removeAttr("disabled");
+                  select.attr("disabled", "disabled");
+                  $(this).parents("tr").find(".add2, .edit").toggle();
+              }
+          });
+
+
+          //! DELETE ROWS
+          $(document).on("click", ".delete", function() {
+              $(this).parents("tr").remove();
+              $("#AddPerson").removeAttr("disabled");
+          });
+
+      });
+
+      //!---------------------
+      // $('.items').select2();
+      // $("table").on('click','.tr_clone_add' ,function() {
+      //    $('.items').select2("destroy");        
+      //    var $tr = $(this).closest('.tr_clone');
+      //    var $clone = $tr.clone();
+      //    $tr.after($clone);
+      //    $('.items').select2();
+      //    $clone.find('.items').select2('val', '');
+      // });
   </script>
   <!-- jQuery UI -->

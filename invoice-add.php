@@ -11,7 +11,13 @@ include "./include/head-link.php"; ?>
 
 
 <body>
-
+    <style>
+        #contents div.select2-container {
+            margin: 10px;
+            display: block;
+            max-width: 60%;
+        }
+    </style>
     <!-- <body data-layout="horizontal" data-topbar="colored"> -->
 
     <!-- Begin page -->
@@ -31,7 +37,7 @@ include "./include/head-link.php"; ?>
             <div class="page-content">
                 <div class="card">
 
-                    <form action="">
+                    <!-- <form action="">
                         <div class="card-body row col-xl-12">
                             <div class="col-12">
                                 <h3>Ajouter une nouvelle <B>Facture</B></h3>
@@ -39,20 +45,9 @@ include "./include/head-link.php"; ?>
                             <hr>
                             <div class="col-6">
                                 <label for="client-id">Client ref</label></br>
-                                <select 
-                                >
+                                <select>
                                     <option selected disabled="disabled">Choisi un Client</option>
-                                    <?php
-                                    $qury = "SELECT * FROM  client ";
-                                    $resry = $connection->query($qury);
-                                    if ($resry) {
-                                        while ($row = mysqli_fetch_assoc($resry)) {
-                                            $client = $row['Nom'];
-                                            $id = $row['ID'];
-                                            echo '<option value="' . $id . '">' . $client . '</option>';
-                                        }
-                                    }
-                                    ?>
+                                    
                                 </select>
                             </div>
                             <div class="col-6">
@@ -64,43 +59,39 @@ include "./include/head-link.php"; ?>
                                 <div class="table-title">
 
                                 </div>
-                                <table class="table table-hover text-nowrap">
-                                        <tr>
-                                            <th scope="col">Actions</th>
-                                            <th scope="col" style="width: 340px;">Désignation</th>
-                                            <th scope="col" style="width: 100px;">Qté</th>
-                                            <th scope="col" style="width: 170px;">Prix</th>
-                                            <th scope="col">Montant HT</th>
+                                <table id="tbldet" class="table table-hover text-nowrap">
+                                    <tr>
+                                        <th scope="col">Actions</th>
+                                        <th scope="col" style="width: 340px;">Désignation</th>
+                                        <th scope="col" style="width: 100px;">Qté</th>
+                                        <th scope="col" style="width: 170px;">Prix</th>
+                                        <th scope="col">Montant HT</th>
 
 
-                                        </tr>
-                                        <tr style="display: none;">
-                                            <td>
-                                                <a class="add" data-toggle="tooltip"><i class="uil uil-check-circle font-size-100"></i></a>
-                                                <a class="edit" data-toggle="tooltip"><i class="uil uil-edit-alt font-size-100"></i></a>
-                                                <a class="delete" data-toggle="tooltip"><i class="uil uil-times-circle font-size-100"></i></a>
-                                            </td>
-                                            <td style="height: 100px;" class="2ndtd">
-                                                <select class="form-control select2" name="StockItem[]">
-                                                    <option selected disabled="disabled">Choisi un Client</option>
-                                                    <?php
-                                                    $qury = "SELECT * FROM  client ";
-                                                    $resry = $connection->query($qury);
-                                                    if ($resry) {
-                                                        while ($row = mysqli_fetch_assoc($resry)) {
-                                                            $client = $row['Nom'];
-                                                            $id = $row['ID'];
-                                                            echo '<option value="' . $id . '">' . $client . '</option>';
-                                                        }
-                                                    }
-                                                    ?>
+                                    </tr>
+                                    <tr class="tr_clone">
+                                        <td>
+                                            <a class="add" data-toggle="tooltip"><i class="uil uil-check-circle font-size-100"></i></a>
+                                            <a class="edit" data-toggle="tooltip"><i class="uil uil-edit-alt font-size-100"></i></a>
+                                            <a class="delete" data-toggle="tooltip"><i class="uil uil-times-circle font-size-100"></i></a>
+                                        </td>
+                                        <td style="height: 100px;" class="2ndtd">
+                                            <div class="input select">
+                                                <select required="required" class="items" name="data[Invoice][item_id][]" tabindex="-1">
+                                                    <option value=""></option>
+                                                    <option value="1">item 1</option>
+                                                    <option value="2">Item 2</option>
+                                                    <option value="3">Item 1+2</option>
+                                                    <option value="4">Set 1</option>
+                                                    <option value="5">NURSERY Books</option>
                                                 </select>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
 
-                                        </tr>
+                                    </tr>
 
                                 </table>
                                 <div class="col-12">
@@ -111,24 +102,98 @@ include "./include/head-link.php"; ?>
 
 
                         </div>
+                    </form> -->
+
+                    <form class="form" action="reflect.php">
+                        <table class="table table-hover text-center" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 250px;">Name</th>
+                                    <th scope="col">Surname</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">this new</th>
+                                    <th scope="col" ></th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr id="template" style="display: none">
+                                    <td scope="row" >
+                                            <select required="required" class="items form-control" name="data[Invoice][item_id][]" tabindex="-1">
+                                                <option selected disabled="disabled">Choisi un Client</option>
+
+                                                <?php
+                                                $qury = "SELECT * FROM  client ";
+                                                $resry = $connection->query($qury);
+                                                if ($resry) {
+                                                    while ($row = mysqli_fetch_assoc($resry)) {
+                                                        $client = $row['Nom'];
+                                                        $id = $row['ID'];
+                                                        echo '<option value="' . $id . '">' . $client . '</option>';
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                    </td>
+                                    <td><input type="text" class="form-control" placeholder="First Name" name="name[]" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Surname" name="surname[]" /></td>
+                                    <td><input type="text" class="form-control" placeholder="Age" name="age[]" /></td>
+                                    <td>
+                                        <a class="add2" data-toggle="tooltip"><i class="uil uil-check-circle"></i></a>
+                                        <a class="edit" title="Edit" data-toggle="tooltip"><i class="uil uil-edit-alt"></i></a>
+                                        <a class="delete" data-toggle="tooltip"><i class="uil uil-trash"></i></a>
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- <div class="form-group">
+                            <div class="class-sm-12 text-right">
+                                <button type="submit" class="btn btn-success">Add</button>
+                            </div>
+                        </div> -->
                     </form>
+                    <button class="btn btn-primary" id="AddPerson">Add Person</button>
+
+                    <!-- <table id="table">
+                        <tr class="tr_clone">
+                            <td>
+                                <div class="input select">
+                                    <select required="required" class="items" name="data[Invoice][item_id][]" tabindex="-1">
+                                        <option value=""></option>
+                                        <option value="1">item 1</option>
+                                        <option value="2">Item 2</option>
+                                        <option value="3">Item 1+2</option>
+                                        <option value="4">Set 1</option>
+                                        <option value="5">NURSERY Books</option>
+                                    </select>
+                                </div>
+                            <td>
+                                <input type="button" class="tr_clone_add" value="Add" name="add">
+                            </td>
+                            <td class="remove">X</td>
+                        </tr>
+                    </table><br>
+                    <br>
+                    <br>
+                    <br>
+                    <br> -->
+                    <!-- End Page-content -->
 
 
                 </div>
+
             </div>
-            <!-- End Page-content -->
+            <!-- end main content-->
 
-            <!--footer Rights-->
-            <?php include "./include/footer.inc.php" ?>
-            <!--end footer Rights-->
         </div>
-        <!-- end main content-->
-
+        <!-- END layout-wrapper -->
     </div>
-    <!-- END layout-wrapper -->
 
-
-
+    <!--footer Rights-->
+    <?php include "./include/footer.inc.php" ?>
+    <!--end footer Rights-->
     <!--Right sidebar setting-->
     <?php include "./include/setting-right.bar.php" ?>
     <!--Right sidebar setting-->

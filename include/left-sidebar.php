@@ -3,7 +3,7 @@
 
 <!-- LOGO -->
 <div class="navbar-brand-box">
-    <a href="index.php" class="logo logo-dark">
+    <a href="index " class="logo logo-dark">
         <span class="logo-sm">
             <img src="assets/images/logo-sm1.png" alt="" height="40">
         </span>
@@ -12,7 +12,7 @@
         </span>
     </a>
 
-    <a href="index.php" class="logo logo-light">
+    <a href="index " class="logo logo-light">
         <span class="logo-sm">
             <img src="assets/images/logo-sm1.png" alt="" height="40">
         </span>
@@ -43,7 +43,7 @@
                
 
             <li>
-                <a href="index.php">
+                <a href="index ">
                     <i class="uil-home-alt"></i><span class="badge rounded-pill bg-primary float-end">01</span>
                     <span>Dashboard</span>
                 </a>
@@ -55,45 +55,49 @@
                     <span>Equipes</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="contacts-grid.php">Equipe Grid</a></li>
-                    <li><a href="equipe-list.php">Equipe List</a></li>
+                    <li><a href="contacts-grid ">Equipe Grid</a></li>
+                    <li><a href="equipe-list ">Equipe List</a></li>
                 </ul>
             </li>
             <li>
-                <a href="client.php" class="waves-effect">
+                <a href="client " class="waves-effect">
                     <i class="uil-user-md"></i>
                     <span>Client</span>
                 </a>
             </li>
             <li>
-                <a href="project.php" class="waves-effect">
+                <a href="project " class="waves-effect">
                     <i class="uil-briefcase"></i>
                     <span>Projet</span>
                 </a>
             </li>
             <li>
-                <a href="taches.php" class="waves-effect">
+                <a href="taches " class="waves-effect">
                     <i class="uil-crosshair-alt"></i>
                     <span>Les Tȃches</span>
                 </a>
             </li>
             
             <li>
-                <a href="calendar.php" class="waves-effect">
+                <a href="calendar " class="waves-effect">
                     <i class="uil-calendar-alt"></i>
                     <span>Calendar</span>
                 </a>
             </li>
 
             <li>
-                <a href="chat.php" class=" waves-effect">
+                <a href="chat " class="waves-effect">
                     <i class="uil-comments-alt"></i>
                     <span class="badge rounded-pill bg-success float-end">direct</span>
                     <span>Chat</span>
                 </a>
             </li>
-
-            
+            <li>
+                <a href="article" class="waves-effect">
+                    <i class="uil-shopping-basket"></i>
+                    <span>Article</span>
+                </a>
+            </li>
 
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -101,8 +105,9 @@
                     <span>Invoices</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="invoices-list.php">Invoice List</a></li>
-                    <li><a href="invoices-detail.php">Invoice Detail</a></li>
+                    <li><a href="invoices-list ">List des facture</a></li>
+                    <li><a href="invoice-add">Ajouter facture</a></li>
+                    <li><a href="invoices-detail ">Invoice Detail</a></li>
                 </ul>
             </li>
 
@@ -114,38 +119,38 @@
             }else{
                 ?>
                 <li>
-                <a href="index.php">
+                <a href="index">
                     <i class="uil-home-alt"></i><span class="badge rounded-pill bg-primary float-end">01</span>
                     <span>Dashboard</span>
                 </a>
             </li>
  <li>
-                <a href="client.php" class="waves-effect">
+                <a href="client " class="waves-effect">
                     <i class="uil-user-md"></i>
                     <span>Client</span>
                 </a>
             </li>
             <li>
-                <a href="project.php" class="waves-effect">
+                <a href="project " class="waves-effect">
                     <i class="uil-briefcase"></i>
                     <span>Projet</span>
                 </a>
             </li>
             <li>
-                <a href="taches.php" class="waves-effect">
+                <a href="taches " class="waves-effect">
                     <i class="uil-crosshair-alt"></i>
                     <span>Les Tȃches</span>
                 </a>
             </li>
  <li>
-                <a href="calendar.php" class="waves-effect">
+                <a href="calendar " class="waves-effect">
                     <i class="uil-calendar-alt"></i>
                     <span>Calendar</span>
                 </a>
             </li>
 
             <li>
-                <a href="chat.php" class=" waves-effect">
+                <a href="chat " class=" waves-effect">
                     <i class="uil-comments-alt"></i>
                     <span class="badge rounded-pill bg-success float-end">direct</span>
                     <span>Chat</span>

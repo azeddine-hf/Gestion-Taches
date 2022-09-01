@@ -53,6 +53,7 @@
   <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
   <script src="assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+  
 
 
   <!-- Table Editable plugin -->
@@ -188,8 +189,10 @@
           //todo edit 
           $(document).on("click", ".edit", function() {
               var select = $(this).parents("tr").find('.items').select2();
-              $(this).parents("tr").find("td:not(:last-child,:first-child").each(function() {
-                  $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+              var selecttag = $(this).parents("tr").find(".items");
+              selecttag.removeAttr("disabled");
+              $(this).parents("tr").find("td:not(:first-child,:last-child,:nth-child(1)):not(:nth-child(3),:nth-child(1)):not(:nth-child(4)").each(function() {
+                  $(this).html('<input type="number" class="form-control" value="' + $(this).text() + '" required>');
               });
               $(this).parents("tr").find(".add2, .edit").toggle();
               select.removeAttr("disabled");
@@ -221,10 +224,10 @@
           //todo VERIFY
           $(document).on("click", ".add2", function() {
               var empty = false;
-              var input = $(this).parents("tr").find('input[type="text"]');
+              var input = $(this).parents("tr").find('input[type="number"]');
               var select = $(this).parents("tr").find('.items').select2();
-              var selval = $(this).parents("tr").find("#myselect8 option:selected").text();
-              var selecttag =  $(this).parents("tr").find("#myselect8");
+              var selval = $(this).parents("tr").find(".items option:selected").text();
+              var selecttag = $(this).parents("tr").find(".items");
 
               input.each(function() {
                   if (!$(this).val()) {
@@ -233,24 +236,23 @@
                   } else {
                       $(this).removeClass("error");
                   }
+                  if (selval != 'Choisi un Client') {
+                  selecttag.attr("disabled", "disabled");
+              }else{
+                empty = true;
+              }
               });
-              if(selval == 'Choisi un Client'){
-                    selecttag.addClass("text-danger");
-                    empty = true;
-                    
-                  }
+              
               $(this).parents("tr").find(".error").first().focus();
               if (!empty) {
                   input.each(function() {
                       $(this).parent("td").html($(this).val());
                   });
                   $("#AddPerson").removeAttr("disabled");
-                  
+
                   $(this).parents("tr").find(".add2, .edit").toggle();
               }
           });
-
-
           //! DELETE ROWS
           $(document).on("click", ".delete", function() {
               $(this).parents("tr").remove();

@@ -37,7 +37,7 @@ include "./include/head-link.php"; ?>
             <div class="page-content">
                 <div class="card">
 
-                    <!-- <form action="">
+                    <form class="form" action="">
                         <div class="card-body row col-xl-12">
                             <div class="col-12">
                                 <h3>Ajouter une nouvelle <B>Facture</B></h3>
@@ -45,9 +45,19 @@ include "./include/head-link.php"; ?>
                             <hr>
                             <div class="col-6">
                                 <label for="client-id">Client ref</label></br>
-                                <select>
+                                <select class="form-control select2">
                                     <option selected disabled="disabled">Choisi un Client</option>
-                                    
+                                    <?php
+                                    $qury = "SELECT * FROM  client ";
+                                    $resry = $connection->query($qury);
+                                    if ($resry) {
+                                        while ($row = mysqli_fetch_assoc($resry)) {
+                                            $client = $row['Nom'];
+                                            $id = $row['ID'];
+                                            echo '<option value="' . $id . '">' . $client . '</option>';
+                                        }
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-6">
@@ -55,106 +65,78 @@ include "./include/head-link.php"; ?>
                                 <textarea id="basicpill-address-input" class="form-control" rows="1" placeholder="Entrer l'adresse client"></textarea>
                             </div>
 
-                            <div class="table-wrapper col-12">
+                            <div class="table-wrapper col-12"><br /> <br>
                                 <div class="table-title">
 
                                 </div>
-                                <table id="tbldet" class="table table-hover text-nowrap">
-                                    <tr>
-                                        <th scope="col">Actions</th>
-                                        <th scope="col" style="width: 340px;">Désignation</th>
-                                        <th scope="col" style="width: 100px;">Qté</th>
-                                        <th scope="col" style="width: 170px;">Prix</th>
-                                        <th scope="col">Montant HT</th>
+                                <table class="table table-hover text-center" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width: 250px;">Désignation</th>
+                                            <th scope="col">Qté</th>
+                                            <th scope="col">Prix</th>
+                                            <th scope="col">Montant Total</th>
+                                            <th scope="col" style="width: 200px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        <tr id="template" style="display: none">
+                                            <td scope="row">
+                                                <select required="required" class="items form-control" name="data[Invoice][item_id][]" tabindex="-1">
+                                                    <option selected disabled="disabled" value="Choisi un Client">Choisi un Client</option>
 
-
-                                    </tr>
-                                    <tr class="tr_clone">
-                                        <td>
-                                            <a class="add" data-toggle="tooltip"><i class="uil uil-check-circle font-size-100"></i></a>
-                                            <a class="edit" data-toggle="tooltip"><i class="uil uil-edit-alt font-size-100"></i></a>
-                                            <a class="delete" data-toggle="tooltip"><i class="uil uil-times-circle font-size-100"></i></a>
-                                        </td>
-                                        <td style="height: 100px;" class="2ndtd">
-                                            <div class="input select">
-                                                <select required="required" class="items" name="data[Invoice][item_id][]" tabindex="-1">
-                                                    <option value=""></option>
-                                                    <option value="1">item 1</option>
-                                                    <option value="2">Item 2</option>
-                                                    <option value="3">Item 1+2</option>
-                                                    <option value="4">Set 1</option>
-                                                    <option value="5">NURSERY Books</option>
+                                                    <?php
+                                                    $qury = "SELECT * FROM  client ";
+                                                    $resry = $connection->query($qury);
+                                                    if ($resry) {
+                                                        while ($row = mysqli_fetch_assoc($resry)) {
+                                                            $client = $row['Nom'];
+                                                            $id = $row['ID'];
+                                                            echo '<option value="' . $id . '">' . $client . '</option>';
+                                                        }
+                                                    }
+                                                    ?>
                                                 </select>
-                                            </div>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                                <div style="z-index: 11">
+                                                    <div id="borderedTost3" class="toast overflow-hidden mt-3" role="alert" aria-live="assertive"
+                                                        aria-atomic="true">
+                                                        <div class="align-items-center text-white bg-warning border-0">
+                                                            <div class="d-flex">
+                                                                <div class="toast-body">
+                                                                    Hello, world! This is a toast message.
+                                                                </div>
+                                                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                                                    aria-label="Close"></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><input type="number" step="0.01" class="form-control inpt"  name="name[]" required/></td>
+                                            <td><input type="text" step="0.01" data-bts-prefix="$" class="form-control" name="surname[]" disabled value="0"/></td>
+                                            <td><input type="number" step="0.01" class="form-control"  name="age[]" disabled value="0"/></td>
+                                            <td>
+                                                <a class="add2 text-success btn" id="newadd" data-toggle="tooltip"><i class="uil uil-check-circle"></i></a>
+                                                <a class="edit text-warning btn" title="Edit" data-toggle="tooltip"><i class="uil uil-edit-alt"></i></a>
+                                                <a class="delete text-danger btn" data-toggle="tooltip"><i class="uil uil-trash"></i></a>
+                                            </td>
 
-                                    </tr>
 
+                                        </tr>
+                                    </tbody>
                                 </table>
+
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-success add-new w-100 rounded-pill"><i class="fa fa-plus"></i> Add New</button>
+                                    <button type="button" class="btn btn-primary add-new w-100 rounded-pill" id="AddPerson"><i class="uil uil-plus-circle"></i> Ajouter Ligne</button>
                                 </div>
                             </div>
 
 
 
                         </div>
-                    </form> -->
-
-                    <form class="form" action="reflect.php">
-                        <table class="table table-hover text-center" id="myTable">
-                            <thead>
-                                <tr>
-                                    <th scope="col" style="width: 250px;">Name</th>
-                                    <th scope="col">Surname</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">this new</th>
-                                    <th scope="col" style="width: 200px;"></th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                                <tr id="template" style="display: none">
-                                    <td scope="row" >
-                                            <select id="myselect8" required="required" class="items form-control" name="data[Invoice][item_id][]" tabindex="-1">
-                                                <option selected disabled="disabled" value="Choisi un Client">Choisi un Client</option>
-
-                                                <?php
-                                                $qury = "SELECT * FROM  client ";
-                                                $resry = $connection->query($qury);
-                                                if ($resry) {
-                                                    while ($row = mysqli_fetch_assoc($resry)) {
-                                                        $client = $row['Nom'];
-                                                        $id = $row['ID'];
-                                                        echo '<option value="' . $id . '">' . $client . '</option>';
-                                                    }
-                                                }
-                                                ?>
-                                            </select>
-                                    </td>
-                                    <td><input type="text" class="form-control" placeholder="First Name" name="name[]" /></td>
-                                    <td><input type="text" class="form-control" placeholder="Surname" name="surname[]" /></td>
-                                    <td><input type="text" class="form-control" placeholder="Age" name="age[]" /></td>
-                                    <td>
-                                        <a class="add2 text-success" data-toggle="tooltip"><i class="uil uil-check-circle"></i></a>
-                                        <a class="edit text-warning" title="Edit" data-toggle="tooltip"><i class="uil uil-edit-alt"></i></a>
-                                        <a class="delete text-danger" data-toggle="tooltip"><i class="uil uil-trash"></i></a>
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <!-- <div class="form-group">
-                            <div class="class-sm-12 text-right">
-                                <button type="submit" class="btn btn-success">Add</button>
-                            </div>
-                        </div> -->
                     </form>
-                    <button class="btn btn-primary" id="AddPerson">Add Person</button>
+
+
 
                     <!-- <table id="table">
                         <tr class="tr_clone">

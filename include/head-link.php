@@ -100,7 +100,7 @@
         color: #E34724;
     }
     table.table td i {
-        font-size: 19px;
+        font-size: 30px;
     }
 	table.table td a.add i {
         font-size: 150%;

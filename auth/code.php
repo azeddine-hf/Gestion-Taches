@@ -239,14 +239,34 @@ if (isset($_POST['sub_message'])) {
 
   $query74 = "UPDATE chat_contact SET last_msg='' WHERE send_date<'" . $row800['date_nw'] . "' AND Id_chat !=" . $row800['azkc'] . " AND (last_msg=Message OR last_msg != Message) AND ((Sender_email='$sender' and Destination_email='$email_recept') or (Destination_email='$sender' and Sender_email='$email_recept')) ";
   $result_qury74 = $connection->query($query74);
-
-
-
-
-
-
-
-
   echo "<meta http-equiv=\"refresh\" content=\"0;URL=../chat_contact.php?ID_equipe=$id_recept\">";
 }
+
+////! add article to db
+
+if (isset($_POST['sub_addarticle'])) {
+  @$designation = $_POST['designation_item'];
+  @$descreption_article = $_POST['desc_article'];
+  @$qte_article = $_POST['qte_article'];
+  @$price_article = $_POST['price_item'];
+  @$category_article = $_POST['category'];
+  $query80 = " INSERT INTO order_item (title_order,desc_order,price_order,qte_enStock,categorie,date_add) VALUES ('$designation','$descreption_article','$price_article','$qte_article','$category_article',sysdate())";
+  $connection->query($query80);
+  echo  '
+  <script src="../assets/libs/jquery/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+         <script type="text/javascript">   
+  
+                    $(document).ready(function(){
+                    swal({
+                        icon: "success",
+                        title: "Bien ",
+                      text: "Article Bien Ajouté !",
+                    })
+                  });
+                </script>
+  ';
+  echo "<meta http-equiv=\"refresh\" content=\"1;URL=../taches.php\">";
+}
+
 ?>

@@ -9,16 +9,16 @@ if (isset($_POST['sub_editproject'])) {
   $enddate = $_POST['date_end'];
   $client = $_POST['clientselect'];
   $members2 = '';
-    if (!empty($_POST['langs'])) {
-      foreach ($_POST['langs'] as $members) {
-        $members2 .= $members . ',';
-      }
+  if (!empty($_POST['langs'])) {
+    foreach ($_POST['langs'] as $members) {
+      $members2 .= $members . ',';
     }
-    $qury = "UPDATE projet SET title_projet	='" . $titlep . "' , members ='" . $members2 . "' ,
+  }
+  $qury = "UPDATE projet SET title_projet	='" . $titlep . "' , members ='" . $members2 . "' ,
         date_debut='" . $startdate . "' , deadline='" . $enddate . "' , statut='" . $statusp . "' , 
         id_client=$client WHERE Id=" . $id2 . "";
-    $resultq = $connection->query($qury);
-    echo  '
+  $resultq = $connection->query($qury);
+  echo  '
   <script src="../assets/libs/jquery/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
          <script type="text/javascript">   
@@ -46,10 +46,10 @@ if (isset($_POST['sub_editclient'])) {
   @$email_cl = $_POST['email_c'];
   @$tel_cl = $_POST['tel_c'];
   @$check_act = $_POST['checkact'];
-    $qury = "UPDATE client SET Nom	='" . $nom_cl . "' , company ='" . $nom_company . "' ,
+  $qury = "UPDATE client SET Nom	='" . $nom_cl . "' , company ='" . $nom_company . "' ,
     email='" . $email_cl . "' , active='" . $check_act . "' , phone='" . $tel_cl . "' WHERE ID=" . $id_cl2 . "";
-    $resultq = $connection->query($qury);
-    echo  '
+  $resultq = $connection->query($qury);
+  echo  '
   <script src="../assets/libs/jquery/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
          <script type="text/javascript">   
@@ -78,11 +78,11 @@ if (isset($_POST['sub_edittache'])) {
   @$end_date = $_POST['date_end'];
   @$status_s2 = $_POST['status_select2'];
   @$prorty22 = $_POST['prop_select2'];
-    $qury = "UPDATE task SET desc_task	='" . $message . "' , status ='" . $status_s2 . "' ,
+  $qury = "UPDATE task SET desc_task	='" . $message . "' , status ='" . $status_s2 . "' ,
     date_start='" . $start_date . "' , date_end='" . $end_date . "' , property='" . $prorty22 . "', ID_equipe =" . $member_s . "
     , ID_projet='" . $projet_s . "' WHERE ID_task =" . $id_task . "";
-    $resultq = $connection->query($qury);
-    echo  '
+  $resultq = $connection->query($qury);
+  echo  '
   <script src="../assets/libs/jquery/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
          <script type="text/javascript">   
@@ -106,10 +106,10 @@ if (isset($_POST['sub_edittache'])) {
 if (isset($_POST['sub_deletetaches'])) {
   @$id_member = $_POST['id_supp'];
 
-    $qury = "UPDATE task SET  is_delete='1' WHERE 	ID_task=" . $id_member . "";
-    $resultq = $connection->query($qury);
-    if($resultq){        
-        echo  '
+  $qury = "UPDATE task SET  is_delete='1' WHERE 	ID_task=" . $id_member . "";
+  $resultq = $connection->query($qury);
+  if ($resultq) {
+    echo  '
         <script src="../assets/libs/jquery/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
                 <script type="text/javascript">   
@@ -118,14 +118,39 @@ if (isset($_POST['sub_deletetaches'])) {
                             swal({
                                 icon: "success",
                                 title: "Bien ",
-                            text: "Member Bien Supprimer !",
+                            text: "Tache Bien Supprimer !",
                             })
                         });
                         </script>
         ';
-        echo "<meta http-equiv=\"refresh\" content=\"0;URL=../taches.php\">";
-        // header("Refresh:2; ../taches.php", true, 303);
-    }
-    
+    echo "<meta http-equiv=\"refresh\" content=\"0;URL=../taches.php\">";
+    // header("Refresh:2; ../taches.php", true, 303);
+  }
+}
+
+//!delete article
+if (isset($_POST['sub_deletearticle'])) {
+  @$id_article = $_POST['article_delete'];
+
+  $qury = "UPDATE order_item SET  is_deleted= 1 WHERE 	ID_task=" . $id_article . "";
+  $resultq = $connection->query($qury);
+  if ($resultq) {
+    echo  '
+        <script src="../assets/libs/jquery/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+                <script type="text/javascript">   
+        
+                            $(document).ready(function(){
+                            swal({
+                                icon: "success",
+                                title: "Bien ",
+                            text: "Article Bien Supprimer !",
+                            })
+                        });
+                        </script>
+        ';
+    echo "<meta http-equiv=\"refresh\" content=\"1;URL=../article.php\">";
+    // header("Refresh:2; ../taches.php", true, 303);
+  }
 }
 ?>

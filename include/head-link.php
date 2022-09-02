@@ -113,6 +113,9 @@
 	table.table .form-control.error {
 		border-color: #f50000;
 	}
+    #digital2:checked,#physique2:checked{
+      background-color: #34C38F;
+    }
 	
         </style>
 

@@ -138,12 +138,13 @@ include './include/connect.php';
                                                     <th>Quatité en stock</th>
                                                     <th>Catégorie</th>
                                                     <th>Date création</th>
+                                                    <th style="display: none;">id article</th>
                                                     <?php if (mysqli_num_rows($resry110) > 0) {
                                                     ?><th>Action</th><?php
                                                                     } else { ?>
                                                         <th style="display:none;"></th>
                                                     <?php } ?>
-
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -162,8 +163,9 @@ include './include/connect.php';
                                                                 } ?></td>
                                                             <td><?php echo $row['price_order'] ?></td>
                                                             <td><?php echo $row['qte_enStock'] ?></td>
-                                                            <td><?php echo strtoupper($row['categorie']) ?></td>
+                                                            <td><?php echo $row['categorie'] ?></td>
                                                             <td><?php echo $row['date_add'] ?></td>
+                                                            <td style="display: none;"><?php echo $row['Id_order'] ?></td>
                                                             <?php
                                                             $query10 = " SELECT * FROM login WHERE type='admin' AND email='$email2'";
                                                             $resry10 = $connection->query($query10);
@@ -175,12 +177,13 @@ include './include/connect.php';
                                                                             <a class="btn waves-effect waves-light editbtn2" data-bs-toggle="modal" data-bs-target="#editmodal2" href=""><i class="uil uil-pen font-size-18 text-primary"></i></a>
                                                                         </li>
                                                                         <li class="list-inline-item">
-                                                                            <a id="" data-bs-toggle="modal" data-bs-target="#delete_tache" class="btn text-danger delete-task"><i class="uil uil-trash-alt font-size-18"></i></a>
+                                                                            <a id="" data-bs-toggle="modal" data-bs-target="#delete_article" class="btn text-danger delete-article"><i class="uil uil-trash-alt font-size-18"></i></a>
                                                                         </li>
 
                                                                     </ul>
                                                                 </td>
                                                             <?php } ?>
+                                                            
 
                                                         </tr>
                                                 <?php
@@ -230,23 +233,27 @@ include './include/connect.php';
                                                         <!--------------Drop Down Client ----------->
                                                         <div class="form-group">
                                                             <label class="form-label" for="desc_item">Description<i class="text-secondary">(Optionnel)</i></label>
-                                                            <textarea id="desc_item" class="form-control" rows="2" placeholder="Description d'article"></textarea>
+                                                            <textarea name="desc_article" id="desc_item" class="form-control" rows="2" placeholder="Description d'article"></textarea>
                                                         </div>
                                                         <!--------------End Drop Down Client ----------->
 
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Quantité <i class="text-danger">*</i></label>
+                                                    <input type="text" placeholder="Quantité" name="qte_article" required>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="price_article">Prix d'article <i class="text-danger">*</i></label>
-                                                        <!-------Date Picker------->
                                                         <div class="input-group">
                                                             <div class="input-group-text">Dhs</div>
-                                                            <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^1-90-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" id="price_article" name="price_item" placeholder="Prix d'article" required>
+                                                            <input class="form-control" type="number" step="any" min="1" id="price_article2" name="price_item" placeholder="Prix d'article" required>
                                                         </div>
-                                                        <!-- <input type="text" class="form-control"   > -->
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -256,11 +263,11 @@ include './include/connect.php';
                                                                 <!--------------Drop Down Client ----------->
                                                                 <div class="form-group">
                                                                     <label class="form-label" for="validationCustom05">Catégorie <i class="text-danger">*</i></label><br />
-                                                                    <input class="form-check-input" type="radio" name="category" id="physique" required>
+                                                                    <input class="form-check-input" type="radio" name="category" id="physique" value="physique" required>
                                                                     <label class="form-check-label" for="physique">
                                                                         Physique
                                                                     </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    <input class="form-check-input" type="radio" name="category" id="digital" required>
+                                                                    <input class="form-check-input" type="radio" name="category" id="digital" value="digital" required>
                                                                     <label class="form-check-label" for="digital">
                                                                         Digital
                                                                     </label>
@@ -272,7 +279,7 @@ include './include/connect.php';
                                                     </div>
                                                 </div>
                                             </div><br />
-                                            <button class="btn btn-success w-100" id="btn-project" type="submit" name="sub_additem">Ajouté article</button>
+                                            <button class="btn btn-success w-100" id="btn-project" type="submit" name="sub_addarticle">Ajouté article</button>
                                         </form>
                                     </div>
                                     <!-- end card -->
@@ -294,7 +301,7 @@ include './include/connect.php';
 
         <!------------Delete modal article---------->
         <!-- Modal -->
-        <div class="modal fade" id="delete_tache" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="backdrop-filter: blur(8px);">
+        <div class="modal fade" id="delete_article" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="backdrop-filter: blur(8px);">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -305,13 +312,13 @@ include './include/connect.php';
                     </div>
                     <div class="modal-body text-center">
                         <form action="./auth/code.edit.php" method="POST">
-                            <input type="hidden" class="form-control" id="idsup" name="id_supp">
+                            <input type="hidden" class="form-control" id="article_del" name="article_delete">
                             <i class="uil-annoyed text-danger border-0 " style="font-size:100px ;"></i><br>
                             <b class="text-danger">Confirmer La Supprission ?</b>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-info" data-bs-dismiss="modal">Annulé</button>
-                        <button type="submit" class="btn btn-danger " name="sub_deletetaches">Supprimé</button>
+                        <button type="submit" class="btn btn-danger " name="sub_deletearticle">Supprimé</button>
                         </form>
                     </div>
                 </div>
@@ -333,7 +340,6 @@ include './include/connect.php';
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <!--------- Input Pop Up Add client------------>
                         <div class="col-xl-12">
                             <div class="card-body">
                                 <!----------Form Pop Up ---------->
@@ -342,29 +348,31 @@ include './include/connect.php';
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label" for="designation">Désignation<i class="text-danger">*</i></label>
-                                                <input type="text" class="form-control" id="designation" name="designation_item" placeholder="Désignation d'article" value="" required>
+                                                <input type="text" class="form-control" id="designation_p" name="designation_item" placeholder="Désignation d'article" value="" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <!--------------Drop Down Client ----------->
                                                 <div class="form-group">
                                                     <label class="form-label" for="desc_item">Description<i class="text-secondary">(Optionnel)</i></label>
-                                                    <textarea id="desc_item" class="form-control" rows="2" placeholder="Description d'article"></textarea>
+                                                    <textarea id="desc_itemarea" class="form-control" rows="2" placeholder="Description d'article"></textarea>
                                                 </div>
-                                                <!--------------End Drop Down Client ----------->
-
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Quantité <i class="text-danger">*</i></label>
+                                            <input type="text" placeholder="Quantité" name="qte_article" id="qte_article" required>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label" for="price_article">Prix d'article <i class="text-danger">*</i></label>
-                                                <!-------Date Picker------->
                                                 <div class="input-group">
                                                     <div class="input-group-text">Dhs</div>
-                                                    <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^1-90-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" id="price_article" name="price_item" placeholder="Prix d'article" required>
+                                                    <input class="form-control" type="number" min="1" id="price_article_it" step="any" name="price_item" placeholder="Prix d'article" required>
                                                 </div>
                                                 <!-- <input type="text" class="form-control"   > -->
                                             </div>
@@ -373,15 +381,14 @@ include './include/connect.php';
                                             <div class="mb-3">
                                                 <div class="col-md-12">
                                                     <div class="mb-3">
-                                                        <!--------------Drop Down Client ----------->
                                                         <div class="form-group">
-                                                            <label class="form-label" for="validationCustom05">Catégorie <i class="text-danger">*</i></label><br />
-                                                            <input class="form-check-input" type="radio" name="category" id="physique" required>
-                                                            <label class="form-check-label" for="physique">
+                                                            <label class="form-label" for="cat">Catégorie <i class="text-danger">*</i></label><br />
+                                                            <input class="form-check-input" type="radio" name="category" id="physique2" value="physique" required>
+                                                            <label class="form-check-label" for="physique2">
                                                                 Physique
                                                             </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <input class="form-check-input" type="radio" name="category" id="digital" required>
-                                                            <label class="form-check-label" for="digital">
+                                                            <input class="form-check-input" type="radio" name="category" id="digital2" value="digital" required>
+                                                            <label class="form-check-label" for="digital2">
                                                                 Digital
                                                             </label>
                                                         </div>
@@ -392,7 +399,7 @@ include './include/connect.php';
                                             </div>
                                         </div>
                                     </div><br />
-                                    <button class="btn btn-success w-100" id="btn-project" type="submit" name="sub_additem">Ajouté article</button>
+                                    <button class="btn btn-success w-100" id="btn-project" type="submit" name="sub_edtitem">Modifier article</button>
                                 </form>
 
                             </div>
@@ -411,10 +418,10 @@ include './include/connect.php';
 
             </div>
         </div>
-        
+
     </div>
-     <!--footer-->
-     <?php include "./include/footer.inc.php" ?>
+    <!--footer-->
+    <?php include "./include/footer.inc.php" ?>
 
     <!--Right sidebar setting-->
     <?php include "./include/setting-right.bar.php" ?>
@@ -424,34 +431,51 @@ include './include/connect.php';
     <?php include './include/scripts.inc.php' ?>
     <!-----DatePicker Script---->
 
-    
 
-  
+
+
     <!-----------AJAX CODE EDIT--------->
     <script>
-            $(document).ready(function() {
+        $(document).ready(function() {
 
-                $('.editbtn2').on('click', function() {
-                    $('#editmodal2').modal('show');
-                    $tr = $(this).closest('tr');
-                    var data = $tr.children("td").map(function() {
-                        return $(this).text();
-                    }).get();
-                    $('#task_id22').val(data[0]);
-                    $('#txt_descr22').val(data[1]);
-                    $("#projet222 option:selected").text(data[2]);
-                    $("#projet222 option:selected").val(data[3]);
-                    $('#member21 option:selected').text(data[4]);
-                    $('#member21 option:selected').val(data[5]);
-                    $('#date_picker98').val(data[6]);
-                    $('#date_picker99').val(data[7]);
-                    $('#status_s2 option:selected').val(data[8]);
-                    $('#status_s2 option:selected').text(data[8]);
-                    $('#proprty2 option:selected').val(data[9]);
-                    $('#proprty2 option:selected').text(data[9]);
-                });
+            $('.editbtn2').on('click', function() {
+                $('#editmodal2').modal('show');
+                $tr = $(this).closest('tr');
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+                $('#designation_p').val(data[4]);
+                $('#desc_itemarea').val(data[1]);
+                $("#qte_article").val(data[3]);
+                $("#price_article_it").val(data[2]);
+                $('input[name=category][value=' + data[4] + ']').attr('checked', true)
+                // $('#digital :checked').val();
+
             });
-        </script>
+        });
+        //! delete article
+        $(document).ready(function() {
+
+            $('.delete-article').on('click', function() {
+                $('#delete_article').modal('show');
+                $tr = $(this).closest('tr');
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+                $('#article_del').val(data[6]);
+            });
+        });
+    </script>
+    <script>
+        $("input[name='qte_article']").TouchSpin({
+            min: 1,
+            max: 1000000000,
+            stepinterval: 50,
+            maxboostedstep: 10000000,
+            buttondown_class: "btn btn-success",
+            buttonup_class: "btn btn-success",
+        });
+    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </body>

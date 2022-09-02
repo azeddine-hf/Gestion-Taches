@@ -149,7 +149,7 @@ if (isset($_POST['sub_deletearticle'])) {
                         });
                         </script>
         ';
-    echo "<meta http-equiv=\"refresh\" content=\"1;URL=../article.php\">";
+    echo "<meta http-equiv=\"refresh\" content=\"0;URL=../article.php\">";
     // header("Refresh:2; ../taches.php", true, 303);
   }
 }
